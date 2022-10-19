@@ -4,9 +4,14 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -77,13 +82,30 @@ class location1Detail extends StatefulWidget {
 
 class _locationDetailState extends State<location1Detail> {
 
-  String location1Congestion = '大混雑';
+  String location1Congestion = '大混雑！！';
+
+  Future<void> congestionChange() async  {
+    print('3秒後に切り替わる');
+    Future.delayed(
+      Duration(seconds: 3),
+      () {
+        setState(()=> location1Congestion = '快適',);
+      },
+    );
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    congestionChange();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 360,
-      height: 210,
+      height: 218,
       decoration: BoxDecoration(
         color: Color.fromARGB(255, 213, 113, 231),
         border: Border.all(width: 4),
@@ -101,7 +123,8 @@ class _locationDetailState extends State<location1Detail> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(location1Congestion, 
+                Text(
+                  location1Congestion, 
                   style: TextStyle(
                     fontWeight: FontWeight.w500, fontSize: 50, 
                   ),
@@ -177,7 +200,7 @@ class _location2DetailState extends State<location2Detail> {
   Widget build(BuildContext context) {
     return Container(
       width: 360,
-      height: 210,
+      height: 218,
       decoration: BoxDecoration(
         color: Color.fromARGB(255, 79, 176, 255),
         border: Border.all(width: 4),
@@ -252,11 +275,16 @@ class _location2DetailState extends State<location2Detail> {
   }
 }
 
-class location2 extends StatelessWidget {
+  class location2 extends StatefulWidget {
   const location2({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<location2> createState() => _location2State();
+}
+
+class _location2State extends State<location2> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -279,11 +307,16 @@ class location2 extends StatelessWidget {
   }
 }
 
-class location1 extends StatelessWidget {
+class location1 extends StatefulWidget {
   const location1({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<location1> createState() => _location1State();
+}
+
+class _location1State extends State<location1> {
   @override
   Widget build(BuildContext context) {
     return Container(
