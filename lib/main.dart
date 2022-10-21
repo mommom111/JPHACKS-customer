@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
@@ -107,7 +110,7 @@ class _locationDetailState extends State<location1Detail> {
     Future.delayed(
       Duration(seconds: 3),
       () {
-        setState(()=> location1Congestion = '快適',);
+        setState(()=> location1Congestion = '快適だ',);
       },
     );
   }
@@ -115,7 +118,7 @@ class _locationDetailState extends State<location1Detail> {
   // final TextEditingController _controller = TextEditingController();
   // // websocket通信と接続
   final _channel = WebSocketChannel.connect(
-    Uri.parse('wss://echo.websocket.events'),
+    Uri.parse('ws://localhost:8765'),
   );
 
   Future<void> congestionCommentChange() async  {
@@ -131,8 +134,9 @@ class _locationDetailState extends State<location1Detail> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    congestionChange();
-    congestionCommentChange();
+    // congestionChange();
+    print('aaaqqq');
+    // congestionCommentChange();
   }
 
   @override
@@ -192,7 +196,7 @@ class _locationDetailState extends State<location1Detail> {
                     child: StreamBuilder(
                     stream: _channel.stream,
                       builder: (context, snapshot) {
-                      return Text(snapshot.hasData ? 'たくさんの人がいます' : '行け');
+                        return Text(snapshot.hasData ? '${snapshot.data}' : '');
                       },
                     ),
                   ),
@@ -235,6 +239,17 @@ class location2Detail extends StatefulWidget {
 class _location2DetailState extends State<location2Detail> {
 
   String location2Congestion = '普通';
+
+  final _channel = WebSocketChannel.connect(
+    Uri.parse('ws://localhost:8765'),
+  );
+
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // congestionChange();
+    // congestionCommentChange();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -288,7 +303,12 @@ class _location2DetailState extends State<location2Detail> {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20),
                     ),
-                    child: Text('今日はいつもより人が多いです！')
+                    child: StreamBuilder(
+                    stream: _channel.stream,
+                      builder: (context, snapshot) {
+                        return Text(snapshot.hasData ? '${snapshot.data}' : '');
+                      },
+                    ),
                   ),
                   Container(
                     margin: EdgeInsets.all(9),
