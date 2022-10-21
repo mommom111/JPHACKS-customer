@@ -34,19 +34,17 @@ class _congestionPageState extends State<congestionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          children: [
-            Container(
-              width: 30,
-              height: 30,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(50),
-                child: Image.asset('images/FF.icon.png'),
-              ),
-            ),
-            Container(
-            )
-          ],
+        title: Container(
+          width: 40,
+          height: 40,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(50),
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(50),
+            child: Image.asset('images/FF.icon.png'),
+          ),
         ),
       ),
       body: Container(
