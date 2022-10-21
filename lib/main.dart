@@ -33,7 +33,19 @@ class _congestionPageState extends State<congestionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('FFL'),
+        title: Row(
+          children: [
+            Container(
+              width: 30,
+              height: 30,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(50),
+                child: Image.asset('images/FF.icon.png'),
+              ),
+            ),
+            Container()
+          ],
+        ),
       ),
       body: Container(
         width: double.infinity,
@@ -144,7 +156,7 @@ class _locationDetailState extends State<location1Detail> {
   Widget build(BuildContext context) {
     return Container(
       width: 360,
-      height: 218,
+      height: 210,
       decoration: BoxDecoration(
         color: Color.fromARGB(255, 213, 113, 231),
         border: Border.all(width: 4),
@@ -158,6 +170,14 @@ class _locationDetailState extends State<location1Detail> {
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(40),
+              boxShadow: [
+                BoxShadow(
+                  color: Color.fromARGB(255, 107, 106, 106), //色
+                  spreadRadius: 2,
+                  blurRadius: 3,
+                  offset: Offset(1, 1),
+                ),
+              ],
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -176,13 +196,13 @@ class _locationDetailState extends State<location1Detail> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Container(
-                  width: 60,
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  child: Text('')),
+                width: 60,
+                height: 60,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(50),
+                  child: Image.asset('Images/HideyasuIcon.jpeg'),
+                ),
+              ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
@@ -197,7 +217,7 @@ class _locationDetailState extends State<location1Detail> {
                     child: StreamBuilder(
                       stream: _channel.stream,
                       builder: (context, snapshot) {
-                        return Text(snapshot.hasData ? 'たくさんの人がいます' : '行け');
+                        return Text(snapshot.hasData ? 'たくさんの人がいます' : '早く行け');
                       },
                     ),
                   ),
@@ -209,7 +229,7 @@ class _locationDetailState extends State<location1Detail> {
                     ),
                     child: ElevatedButton(
                       child: const Text(
-                        '評価 : ⭐️⭐️⭐️',
+                        '⭐️⭐️⭐️⭐️⭐️',
                         style: TextStyle(
                           color: Colors.black,
                         ),
@@ -249,7 +269,7 @@ class _location2DetailState extends State<location2Detail> {
   Widget build(BuildContext context) {
     return Container(
       width: 360,
-      height: 218,
+      height: 210,
       decoration: BoxDecoration(
         color: Color.fromARGB(255, 79, 176, 255),
         border: Border.all(width: 4),
@@ -261,6 +281,14 @@ class _location2DetailState extends State<location2Detail> {
             margin: EdgeInsets.all(10),
             width: 280,
             decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Color.fromARGB(255, 107, 106, 106), //色
+                  spreadRadius: 2,
+                  blurRadius: 3,
+                  offset: Offset(1, 1),
+                ),
+              ],
               color: Colors.white,
               borderRadius: BorderRadius.circular(40),
             ),
@@ -281,13 +309,13 @@ class _location2DetailState extends State<location2Detail> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Container(
-                  width: 60,
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  child: Text('')),
+                width: 60,
+                height: 60,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(50),
+                  child: Image.asset('Images/HideyasuIcon.jpeg'),
+                ),
+              ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
@@ -296,18 +324,15 @@ class _location2DetailState extends State<location2Detail> {
                       margin: EdgeInsets.all(5),
                       decoration: BoxDecoration(
                         color: Colors.white,
+                        border: Border.all(width: 3),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text('今日はいつもより人が多いです！')),
                   Container(
                     margin: EdgeInsets.all(9),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
                     child: ElevatedButton(
                       child: const Text(
-                        '評価 : ⭐️⭐️⭐️',
+                        '⭐️⭐️⭐️⭐️',
                         style: TextStyle(
                           color: Colors.black,
                         ),
