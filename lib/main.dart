@@ -16,7 +16,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-    home: congestionPage(),
+      home: congestionPage(),
     );
   }
 }
@@ -29,7 +29,6 @@ class congestionPage extends StatefulWidget {
 }
 
 class _congestionPageState extends State<congestionPage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,8 +70,10 @@ class _congestionPageState extends State<congestionPage> {
               child: Center(
                 child: Column(
                   children: [
-                    Text('混雑度',
-                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 30),
+                    Text(
+                      '混雑度',
+                      style:
+                          TextStyle(fontWeight: FontWeight.w500, fontSize: 30),
                     ),
                   ],
                 ),
@@ -83,6 +84,7 @@ class _congestionPageState extends State<congestionPage> {
             location2(),
             location2Detail(),
             Container(
+              margin: EdgeInsets.only(top: 35),
               alignment: Alignment.bottomCenter,
               child: BottomNavigationBar(
                 items: const <BottomNavigationBarItem>[
@@ -116,17 +118,18 @@ class location1Detail extends StatefulWidget {
 }
 
 class _locationDetailState extends State<location1Detail> {
-
   String location1Congestion = '大混雑！！';
 
   String locationCommentCongestion = '今日はいつもより人が多いです！';
 
-  Future<void> congestionChange() async  {
+  Future<void> congestionChange() async {
     print('3秒後に切り替わる');
     Future.delayed(
       Duration(seconds: 3),
       () {
-        setState(()=> location1Congestion = '快適',);
+        setState(
+          () => location1Congestion = '快適',
+        );
       },
     );
   }
@@ -137,12 +140,14 @@ class _locationDetailState extends State<location1Detail> {
     Uri.parse('wss://echo.websocket.events'),
   );
 
-  Future<void> congestionCommentChange() async  {
+  Future<void> congestionCommentChange() async {
     print('3秒後に切り替わる');
     Future.delayed(
       Duration(seconds: 3),
       () {
-        setState(()=> locationCommentCongestion = '比較的人が少ないです',);
+        setState(
+          () => locationCommentCongestion = '比較的人が少ないです',
+        );
       },
     );
   }
@@ -175,7 +180,7 @@ class _locationDetailState extends State<location1Detail> {
               boxShadow: [
                 BoxShadow(
                   color: Color.fromARGB(255, 107, 106, 106), //色
-                  spreadRadius: 2, 
+                  spreadRadius: 2,
                   blurRadius: 3,
                   offset: Offset(1, 1),
                 ),
@@ -185,9 +190,10 @@ class _locationDetailState extends State<location1Detail> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  location1Congestion, 
+                  location1Congestion,
                   style: TextStyle(
-                    fontWeight: FontWeight.w500, fontSize: 50, 
+                    fontWeight: FontWeight.w500,
+                    fontSize: 50,
                   ),
                 ),
               ],
@@ -216,23 +222,28 @@ class _locationDetailState extends State<location1Detail> {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: StreamBuilder(
-                    stream: _channel.stream,
+                      stream: _channel.stream,
                       builder: (context, snapshot) {
-                      return Text(snapshot.hasData ? 'たくさんの人がいます' : '早く行け');
+                        return Text(snapshot.hasData ? 'たくさんの人がいます' : '早く行け');
                       },
                     ),
                   ),
                   Container(
                     margin: EdgeInsets.all(9),
                     decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(50),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(50),
                     ),
                     child: ElevatedButton(
-                      child: const Text('⭐️⭐️⭐️⭐️⭐️', style: TextStyle(color: Colors.black,),),
+                      child: const Text(
+                        '⭐️⭐️⭐️⭐️⭐️',
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
                       style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
-                      shape: const StadiumBorder(),
+                        primary: Colors.white,
+                        shape: const StadiumBorder(),
                       ),
                       onPressed: () {},
                     ),
@@ -259,7 +270,6 @@ class location2Detail extends StatefulWidget {
 }
 
 class _location2DetailState extends State<location2Detail> {
-
   String location2Congestion = '普通';
 
   @override
@@ -278,23 +288,25 @@ class _location2DetailState extends State<location2Detail> {
             margin: EdgeInsets.all(10),
             width: 280,
             decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Color.fromARGB(255, 107, 106, 106), //色
-                spreadRadius: 2, 
-                blurRadius: 3,
-                offset: Offset(1, 1),
-              ),
-            ],
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(40),
+              boxShadow: [
+                BoxShadow(
+                  color: Color.fromARGB(255, 107, 106, 106), //色
+                  spreadRadius: 2,
+                  blurRadius: 3,
+                  offset: Offset(1, 1),
+                ),
+              ],
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(40),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(location2Congestion, 
+                Text(
+                  location2Congestion,
                   style: TextStyle(
-                    fontWeight: FontWeight.w500, fontSize: 50, 
+                    fontWeight: FontWeight.w500,
+                    fontSize: 50,
                   ),
                 ),
               ],
@@ -315,24 +327,28 @@ class _location2DetailState extends State<location2Detail> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Container(
-                    padding: EdgeInsets.all(9),
-                    margin: EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(width: 3),
-                    borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Text('今日はいつもより人が多いです！')
-                  ),
+                      padding: EdgeInsets.all(9),
+                      margin: EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(width: 3),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Text('今日はいつもより人が多いです！')),
                   Container(
                     margin: EdgeInsets.all(9),
                     child: ElevatedButton(
-                    child: const Text('⭐️⭐️⭐️⭐️', style: TextStyle(color: Colors.black,),),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
-                      shape: const StadiumBorder(),
-                    ),
-                    onPressed: () {},
+                      child: const Text(
+                        '⭐️⭐️⭐️⭐️',
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.white,
+                        shape: const StadiumBorder(),
+                      ),
+                      onPressed: () {},
                     ),
                   ),
                 ],
@@ -345,7 +361,7 @@ class _location2DetailState extends State<location2Detail> {
   }
 }
 
-  class location2 extends StatefulWidget {
+class location2 extends StatefulWidget {
   const location2({
     Key? key,
   }) : super(key: key);
@@ -361,7 +377,8 @@ class _location2State extends State<location2> {
       width: 320,
       margin: EdgeInsets.only(top: 40),
       padding: EdgeInsets.all(1),
-      child: Text('食堂２',
+      child: Text(
+        '食堂２',
         style: TextStyle(
           color: Colors.transparent,
           shadows: [
@@ -392,7 +409,8 @@ class _location1State extends State<location1> {
     return Container(
       width: 320,
       padding: EdgeInsets.all(1),
-      child: Text('食堂１',
+      child: Text(
+        '食堂１',
         style: TextStyle(
           color: Colors.transparent,
           shadows: [
