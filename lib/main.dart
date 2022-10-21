@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 
 void main() {
   runApp(const MyApp());
@@ -84,6 +85,8 @@ class _locationDetailState extends State<location1Detail> {
 
   String location1Congestion = '大混雑！！';
 
+  String locationCommentCongestion = '今日はいつもより人が多いです！';
+
   Future<void> congestionChange() async  {
     print('3秒後に切り替わる');
     Future.delayed(
@@ -94,11 +97,27 @@ class _locationDetailState extends State<location1Detail> {
     );
   }
 
-  @override
+  // final TextEditingController _controller = TextEditingController();
+  // // websocket通信と接続
+  final _channel = WebSocketChannel.connect(
+    Uri.parse('wss://echo.websocket.events'),
+  );
+
+  Future<void> congestionCommentChange() async  {
+    print('3秒後に切り替わる');
+    Future.delayed(
+      Duration(seconds: 3),
+      () {
+        setState(()=> locationCommentCongestion = '比較的人が少ないです',);
+      },
+    );
+  }
+
   void initState() {
     // TODO: implement initState
     super.initState();
     congestionChange();
+    congestionCommentChange();
   }
 
   @override
@@ -123,12 +142,23 @@ class _locationDetailState extends State<location1Detail> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  location1Congestion, 
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500, fontSize: 50, 
-                  ),
-                ),
+                StreamBuilder(
+                  stream: _channel.stream,
+                  builder: (context, snapshot) {
+                    return Text(
+                      snapshot.hasData ? '大混雑！' : '快適',
+                      style: TextStyle(
+                      fontWeight: FontWeight.w500, fontSize: 50, 
+                    ),
+                    );
+                  },
+                )
+                // Text(
+                //   location1Congestion, 
+                //   style: TextStyle(
+                //     fontWeight: FontWeight.w500, fontSize: 50, 
+                //   ),
+                // ),
               ],
             ),
           ),
@@ -154,7 +184,12 @@ class _locationDetailState extends State<location1Detail> {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20),
                     ),
-                    child: Text('今日はいつもより人が多いです！')
+                    child: StreamBuilder(
+                      stream: _channel.stream,
+                      builder: (context, snapshot) {
+                        return Text(snapshot.hasData ? '今日はいつもより人が多いです！' : '空いていますよ！');
+                      },
+                    )
                   ),
                   Container(
                     margin: EdgeInsets.all(9),
@@ -163,12 +198,12 @@ class _locationDetailState extends State<location1Detail> {
                     borderRadius: BorderRadius.circular(50),
                     ),
                     child: ElevatedButton(
-                    child: const Text('評価 : ⭐️⭐️⭐️', style: TextStyle(color: Colors.black,),),
-                    style: ElevatedButton.styleFrom(
+                      child: const Text('評価 : ⭐️⭐️⭐️', style: TextStyle(color: Colors.black,),),
+                      style: ElevatedButton.styleFrom(
                       primary: Colors.white,
                       shape: const StadiumBorder(),
-                    ),
-                    onPressed: () {},
+                      ),
+                      onPressed: () {},
                     ),
                   ),
                 ],
@@ -179,6 +214,19 @@ class _locationDetailState extends State<location1Detail> {
       ),
     );
   }
+
+  // void _sendMessage() {
+  //   if (_controller.text.isNotEmpty) {
+  //     _channel.sink.add(_controller.text);
+  //   }
+  // }
+
+  // @override
+  // void dispose() {
+  //   _channel.sink.close();
+  //   _controller.dispose();
+  //   super.dispose();
+  // }
 }
 
 // 2個目の情報
