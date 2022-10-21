@@ -63,6 +63,21 @@ class _congestionPageState extends State<congestionPage> {
             location1Detail(),
             location2(),
             location2Detail(),
+            Container(
+              alignment: Alignment.bottomCenter,
+              child: BottomNavigationBar(
+                items: const <BottomNavigationBarItem>[
+                  BottomNavigationBarItem(icon: Icon(Icons.home), label: 'ホーム'),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.favorite), label: 'お気に入り'),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.notifications), label: 'お知らせ'),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.person), label: 'アカウント'),
+                ],
+                type: BottomNavigationBarType.fixed,
+              ),
+            ),
           ],
         ),
       ),
@@ -170,8 +185,9 @@ class _locationDetailState extends State<location1Detail> {
                     padding: EdgeInsets.all(9),
                     margin: EdgeInsets.all(5),
                     decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
+                      color: Colors.white,
+                      border: Border.all(width: 3),
+                      borderRadius: BorderRadius.circular(20),
                     ),
                     child: StreamBuilder(
                     stream: _channel.stream,
