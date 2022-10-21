@@ -142,23 +142,12 @@ class _locationDetailState extends State<location1Detail> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                StreamBuilder(
-                  stream: _channel.stream,
-                  builder: (context, snapshot) {
-                    return Text(
-                      snapshot.hasData ? '大混雑！' : '快適',
-                      style: TextStyle(
-                      fontWeight: FontWeight.w500, fontSize: 50, 
-                    ),
-                    );
-                  },
-                )
-                // Text(
-                //   location1Congestion, 
-                //   style: TextStyle(
-                //     fontWeight: FontWeight.w500, fontSize: 50, 
-                //   ),
-                // ),
+                Text(
+                  location1Congestion, 
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500, fontSize: 50, 
+                  ),
+                ),
               ],
             ),
           ),
@@ -185,11 +174,11 @@ class _locationDetailState extends State<location1Detail> {
                     borderRadius: BorderRadius.circular(20),
                     ),
                     child: StreamBuilder(
-                      stream: _channel.stream,
+                    stream: _channel.stream,
                       builder: (context, snapshot) {
-                        return Text(snapshot.hasData ? '今日はいつもより人が多いです！' : '空いていますよ！');
+                      return Text(snapshot.hasData ? 'たくさんの人がいます' : '行け');
                       },
-                    )
+                    ),
                   ),
                   Container(
                     margin: EdgeInsets.all(9),
@@ -214,19 +203,6 @@ class _locationDetailState extends State<location1Detail> {
       ),
     );
   }
-
-  // void _sendMessage() {
-  //   if (_controller.text.isNotEmpty) {
-  //     _channel.sink.add(_controller.text);
-  //   }
-  // }
-
-  // @override
-  // void dispose() {
-  //   _channel.sink.close();
-  //   _controller.dispose();
-  //   super.dispose();
-  // }
 }
 
 // 2個目の情報
