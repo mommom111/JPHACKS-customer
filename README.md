@@ -67,3 +67,11 @@ wifiを導入することよりもコストの削減ができる。
     * iBeacon
     * Flutter
     * Dart
+
+#### 備考
+
+こちらのリポジトリはsenderのリポジトリであり、receiver側やserver側のリポジトリを分けて作成したので
+そちらもご確認よろしくお願いいたします。
+
+receiver : (https://github.com/mommom111/D_2207)
+server : (https://github.com/mommom111/ServerHACKS)
