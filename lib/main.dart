@@ -87,7 +87,7 @@ class _congestionPageState extends State<congestionPage> {
             location2(),
             location2Detail(),
             Container(
-              margin: EdgeInsets.only(top: 35),
+              margin: EdgeInsets.only(top: 5),
               alignment: Alignment.bottomCenter,
               child: BottomNavigationBar(
                 items: const <BottomNavigationBarItem>[
@@ -121,17 +121,17 @@ class location1Detail extends StatefulWidget {
 }
 
 class _locationDetailState extends State<location1Detail> {
-  String location1Congestion = '大混雑！！';
+  String location1Congestion = '快適！！';
 
   String locationCommentCongestion = '今日はいつもより人が多いです！';
 
   Future<void> congestionChange() async {
     print('3秒後に切り替わる');
     Future.delayed(
-      Duration(seconds: 3),
+      Duration(seconds: 7),
       () {
         setState(
-          () => location1Congestion = '快適',
+          () => location1Congestion = '大混雑',
         );
       },
     );
@@ -140,7 +140,7 @@ class _locationDetailState extends State<location1Detail> {
   // final TextEditingController _controller = TextEditingController();
   // // websocket通信と接続
   final _channel = WebSocketChannel.connect(
-    Uri.parse('ws://localhost:8765'),
+    Uri.parse('wss://4208-221-251-146-158.jp.ngrok.io'),
   );
 
   Future<void> congestionCommentChange() async {
@@ -158,9 +158,9 @@ class _locationDetailState extends State<location1Detail> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    // congestionChange();
+    congestionChange();
     print('aaaqqq');
-    // congestionCommentChange();
+    congestionCommentChange();
   }
 
   @override
@@ -211,7 +211,7 @@ class _locationDetailState extends State<location1Detail> {
                 height: 60,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(50),
-                  child: Image.asset('Images/HideyasuIcon.jpeg'),
+                  child: Image.asset('Images/HidePC.png'),
                 ),
               ),
               Column(
@@ -225,12 +225,7 @@ class _locationDetailState extends State<location1Detail> {
                       border: Border.all(width: 3),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: StreamBuilder(
-                      stream: _channel.stream,
-                      builder: (context, snapshot) {
-                        return Text(snapshot.hasData ? '${snapshot.data}' : '');
-                      },
-                    ),
+                    child: Text('今日のおすすめは唐揚げ定食！')
                   ),
                   Container(
                     margin: EdgeInsets.all(9),
@@ -277,7 +272,7 @@ class _location2DetailState extends State<location2Detail> {
   String location2Congestion = '普通';
 
   final _channel = WebSocketChannel.connect(
-    Uri.parse('ws://localhost:8765'),
+    Uri.parse('wss://4208-221-251-146-158.jp.ngrok.io'),
   );
 
   void initState() {
@@ -335,7 +330,7 @@ class _location2DetailState extends State<location2Detail> {
                 height: 60,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(50),
-                  child: Image.asset('Images/HideyasuIcon.jpeg'),
+                  child: Image.asset('Images/HidePC.png'),
                 ),
               ),
               Column(
@@ -350,12 +345,7 @@ class _location2DetailState extends State<location2Detail> {
                     border: Border.all(width: 3),
                     borderRadius: BorderRadius.circular(20),
                     ),
-                    child: StreamBuilder(
-                    stream: _channel.stream,
-                      builder: (context, snapshot) {
-                        return Text(snapshot.hasData ? '${snapshot.data}' : '');
-                      },
-                    ),
+                    child: Text('今日のおすすめは生姜焼き定食！')
                   ),
                   Container(
                     margin: EdgeInsets.all(9),
