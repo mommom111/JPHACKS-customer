@@ -140,7 +140,7 @@ class _locationDetailState extends State<location1Detail> {
   // final TextEditingController _controller = TextEditingController();
   // // websocket通信と接続
   final _channel = WebSocketChannel.connect(
-    Uri.parse('wss://4208-221-251-146-158.jp.ngrok.io'),
+    Uri.parse('wss://88c3-221-251-146-158.jp.ngrok.io'),
   );
 
   Future<void> congestionCommentChange() async {
@@ -190,19 +190,18 @@ class _locationDetailState extends State<location1Detail> {
                 ),
               ],
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  location1Congestion,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 50,
-                  ),
-                ),
-              ],
+            child: StreamBuilder(
+                      stream: _channel.stream,
+                      builder: (context, snapshot) {
+                        return Text(snapshot.hasData ? '${snapshot.data}' : '',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 50,
+                        ),
+                      );
+                     },
+                   ),
             ),
-          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -211,13 +210,14 @@ class _locationDetailState extends State<location1Detail> {
                 height: 60,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(50),
-                  child: Image.asset('Images/HidePC.png'),
+                  child: Image.asset('images/HidePC.png'),
                 ),
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Container(
+                    alignment: Alignment.center,
                     padding: EdgeInsets.all(9),
                     margin: EdgeInsets.all(5),
                     decoration: BoxDecoration(
@@ -226,6 +226,12 @@ class _locationDetailState extends State<location1Detail> {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Text('今日のおすすめは唐揚げ定食！')
+                  //   child: StreamBuilder(
+                  //     stream: _channel.stream,
+                  //     builder: (context, snapshot) {
+                  //      return Text(snapshot.hasData ? '${snapshot.data}' : '');
+                  //    },
+                  //  ),
                   ),
                   Container(
                     margin: EdgeInsets.all(9),
@@ -330,14 +336,13 @@ class _location2DetailState extends State<location2Detail> {
                 height: 60,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(50),
-                  child: Image.asset('Images/HidePC.png'),
+                  child: Image.asset('images/HidePC.png'),
                 ),
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Container(
-
                     padding: EdgeInsets.all(9),
                     margin: EdgeInsets.all(5),
                     decoration: BoxDecoration(
