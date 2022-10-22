@@ -1,16 +1,74 @@
-# jphackscustomer
+# FreedomFrontline
 
-A new Flutter project.
+## 製品概要
 
-## Getting Started
+### 混雑 × Tech
 
-This project is a starting point for a Flutter application.
+混雑からの解放 "FreedomFrontline"
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+> **Note**
+>
+> 詳細は[PRD (プロダクト要求仕様書)](https://github.com/jphacks/D_2208/wiki/PRD%20(プロダクト要求仕様書))を参照してください
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### 背景(製品開発のきっかけ、課題等）
+
+昼休み前には満員になってしまう学食。
+そんなのしんどすぎると言うことで混雑の状況が分かれば行くかいかないか決められたら
+嬉しいと考えたことがきっかけです。
+
+
+### 製品説明（具体的な製品の説明）
+
+senderとreceiverがあり、
+receiver側がsender側からのBluetooth接続を確認して、
+そこに今どれくらいの人がいるのかをwebsocketを通じてサーバーにアップロードする。
+sender側はreceiver側が送ったデータを取ってきて、その数に応じてsender側の画面の表示を変えます。
+
+### 特長
+
+#### 1. リモートで混雑状況がわかる
+
+その場に行かなくても、どれくらいのひとがいるのかわかる。
+
+#### 2. 導入をもっと簡単に
+
+wifiを導入しようとすると手間とコストがかかってしまいます。
+しかしibeaconで検知することで
+どこでも手軽に導入することができます。
+
+#### 3. スライド操作できる人を制限できる
+
+本システムでは同時にスライド操作できる人を制限しています。
+これは仮に参加者全員のスマートフォンからスライド切り替え可能だと、押し間違いによる予期せぬスライド操作が懸念されるためです。
+現在のスピーカーが次のスピーカーに**ポインタ渡し**することで、ユーザが安心してプレゼンテーションを行えるよう設計しました。
+
+### 解決出来ること
+
+遠くにいても特定の場所の混雑状況がわかる。
+wifiを導入することよりもコストの削減ができる。
+
+### 今後の展望
+
+* バックグラウンド実行
+    * アプリを使用していないといけないと言うことがネックなので、バックグラウンドで行うことができれば解決できると考えられます。
+* 学食以外での実装
+    * 学食以外でもオフィス内やトイレなどに導入できればさらにいいものとして使うことができると考えられる、
+
+### 注力したこと（こだわり等）
+
+* websocketを導入したことでリアルタイムで混雑度がわかるようにしたこと
+
+## 開発技術
+
+### 活用した技術
+
+#### フレームワーク・ライブラリ・モジュール
+
+* sender画面
+    * Flutter
+    * Dart
+* receiver画面
+    * iBeacon
+    * Flutter
+    * Dart
